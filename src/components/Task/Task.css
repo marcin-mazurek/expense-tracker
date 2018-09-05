@@ -1,0 +1,11 @@
+.task {
+  margin: 8px 5px;
+}
+
+.task__checkbox {
+  margin-right: 8px;
+}
+
+.task--done {
+  text-decoration-line: line-through;
+}
