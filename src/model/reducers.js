@@ -1,9 +1,9 @@
 export function taskReducer(tasks = [], action) {
   switch (action.type) {
-    case "ADD_TASK":
+    case 'ADD_TASK':
       return [...tasks, action.payload];
 
-    case "TOGGLE_TASK":
+    case 'TOGGLE_TASK':
       return tasks.map(task => {
         if (task.id === action.payload) {
           return { ...task, done: !task.done };
@@ -17,13 +17,13 @@ export function taskReducer(tasks = [], action) {
   }
 }
 
-export function newTaskReducer(text = "", action) {
+export function newTaskReducer(text = '', action) {
   switch (action.type) {
-    case "CHANGE_TEXT":
+    case 'CHANGE_TEXT':
       return action.payload;
 
-    case "ADD_TASK":
-      return "";
+    case 'ADD_TASK':
+      return '';
 
     default:
       return text;

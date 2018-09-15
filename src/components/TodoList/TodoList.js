@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Task from "../Task/Task";
-import "./TodoList.css";
+import React, { Component } from 'react';
+import Task from '../Task/Task';
+import './TodoList.css';
 
 export default class TodoList extends Component {
   handleAddingNewItem = () => {

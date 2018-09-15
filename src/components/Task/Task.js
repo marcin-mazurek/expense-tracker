@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import cx from "classnames";
-import "./Task.css";
+import React, { Component } from 'react';
+import cx from 'classnames';
+import './Task.css';
 
 export default class Task extends Component {
   handleToggle = () => {
@@ -11,7 +11,7 @@ export default class Task extends Component {
     const { text, done } = this.props;
 
     return (
-      <li className={cx("task", { "task--done": done })}>
+      <li className={cx('task', { 'task--done': done })}>
         <label>
           <input
             type="checkbox"
