@@ -1,22 +1,11 @@
-import { createStore as createReduxStore, combineReducers } from 'redux';
-import { taskReducer, newTaskReducer } from './reducers';
+import { combineReducers, createStore as createReduxStore } from 'redux';
+import transactionsReducer from '../ducks/transations/reducers';
 
 export default function createStore() {
   const reducers = combineReducers({
-    tasks: taskReducer,
-    newItemText: newTaskReducer
+    transactions: transactionsReducer,
   });
+  const devtool = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
-  return createReduxStore(
-    reducers,
-    {
-      tasks: [
-        { id: 1, text: 'Task 1', done: false },
-        { id: 2, text: 'Task 2', done: false },
-        { id: 3, text: 'Task 3', done: false }
-      ],
-      newItemText: 'Add me!'
-    },
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
+  return createReduxStore(reducers, devtool);
 }
