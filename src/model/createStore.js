@@ -1,5 +1,5 @@
 import { combineReducers, createStore as createReduxStore } from 'redux';
-import transactionsReducer from '../ducks/transations/reducers';
+import transactionsReducer from '../ducks/transactions/reducers';
 
 export default function createStore() {
   const reducers = combineReducers({

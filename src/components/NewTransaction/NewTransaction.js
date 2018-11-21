@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { newTransactionType } from '../../types';
 import normalizeModel from './normalizeModel';
 
+import './NewTransaction.css';
+
+const NewTransactionInput = (props) => <input type="text" className="new-transaction__input" {...props} />;
+
 export default class NewTransaction extends Component {
   static propTypes = {
     transaction: newTransactionType,
@@ -29,24 +33,8 @@ export default class NewTransaction extends Component {
   render() {
     return (
       <tr>
-        <td>
-          <input
-            type="text"
-            value={this.props.transaction.description}
-            onChange={this.handleDescriptionChange}
-            placeholder="Description"
-          />
-        </td>
-        <td>
-          <input
-            type="text"
-            value={this.props.transaction.category}
-            onChange={this.handleCategoryChange}
-            placeholder="Category"
-          />
-        </td>
-        <td>
-          <input
+        <td class="new-transaction__cell">
+          <NewTransactionInput
             type="number"
             step="0.01"
             value={this.props.transaction.value}
@@ -54,8 +42,22 @@ export default class NewTransaction extends Component {
             placeholder="0.00"
           />
         </td>
-        <td>
-          <button onClick={this.handleSave}>Save</button>
+        <td class="new-transaction__cell">
+          <NewTransactionInput
+            value={this.props.transaction.category}
+            onChange={this.handleCategoryChange}
+            placeholder="Category"
+          />
+        </td>
+        <td class="new-transaction__cell">
+          <NewTransactionInput
+            value={this.props.transaction.description}
+            onChange={this.handleDescriptionChange}
+            placeholder="Description"
+          />
+        </td>
+        <td class="new-transaction__cell">
+          <button onClick={this.handleSave} className="new-transaction__button">Save</button>
         </td>
       </tr>
     );

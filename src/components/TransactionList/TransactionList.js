@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import TransactionItem from '../Transaction/TransactionItem';
 import NewTransaction from '../NewTransaction/NewTransaction';
-import './TransactionTable.css';
+import './TransactionList.css';
 import { transactionType, newTransactionType } from '../../types';
 
-export default class TransactionTable extends Component {
+export default class TransactionList extends Component {
   static propTypes = {
     allTransactions: PropTypes.arrayOf(transactionType).isRequired,
     newTransaction: newTransactionType,
@@ -15,14 +15,14 @@ export default class TransactionTable extends Component {
 
   render() {
     return (
-      <div className="transaction-table">
+      <div className="transaction-list">
         <h2>Expense list</h2>
-        <table>
+        <table className="transaction-list__table">
           <thead>
             <tr>
-              <th>Description</th>
-              <th>Category</th>
               <th>Amount</th>
+              <th>Category</th>
+              <th>Description</th>
               <th>Actions</th>
             </tr>
           </thead>

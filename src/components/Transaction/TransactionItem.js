@@ -15,9 +15,9 @@ export default class TransactionItem extends Component {
   render() {
     return (
       <tr>
-        <td>{this.props.transaction.description}</td>
-        <td>{this.props.transaction.category}</td>
         <td>{this.props.transaction.value.toFixed(2)}</td>
+        <td>{this.props.transaction.category}</td>
+        <td>{this.props.transaction.description}</td>
         <td>
           <button onClick={this.handleRemove}>🗑</button>
         </td>
