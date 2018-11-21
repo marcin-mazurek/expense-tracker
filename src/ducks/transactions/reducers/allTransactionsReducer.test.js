@@ -1,55 +1,65 @@
 import allTransactionsReducer from './allTransactionsReducer';
-import { addTransaction, removeTransaction, changeTransaction } from '../actions';
+import { loadTransactionsSuccess, addTransaction, removeTransaction, changeTransaction } from '../actions';
 
 import generateGuid from '../../../utils/generateGuid';
 jest.mock('../../../utils/generateGuid');
 
-const transaction1Payload = {
+const firstTransactionPayload = {
   description: 'Transaction 1',
   category: 'Grocery',
   value: 1.0,
 };
-const transaction1Id = '0000-00000-0000';
-const transaction1 = {
-  ...transaction1Payload,
-  id: transaction1Id,
+const firstTransactionId = '0000-00000-0000';
+const firstTransaction = {
+  ...firstTransactionPayload,
+  id: firstTransactionId,
 };
 
-const transaction2Payload = {
+const secondTrasnactionPayload = {
   description: 'Transaction 2',
   category: 'Commuting',
   value: 65.9,
 };
-const transaction2Id = '1111-22222-3333';
-const transaction2 = {
-  ...transaction2Payload,
-  id: transaction2Id,
+const secondTransactionId = '1111-22222-3333';
+const secondTransaction = {
+  ...secondTrasnactionPayload,
+  id: secondTransactionId,
 };
 
-const sampleState = [transaction1, transaction2];
+const sampleState = [firstTransaction, secondTransaction];
 
 describe('allTransactionsReducer', () => {
   test('begins with an empty array by default', () => {
     expect(allTransactionsReducer()).toEqual([]);
   });
 
+  describe('loadTransactionsSuccess', () => {
+    test('handles action', () => {
+      expect(allTransactionsReducer([], loadTransactionsSuccess(sampleState))).toEqual(sampleState);
+    });
+
+    test('discards the previous state if set', () => {
+      expect(allTransactionsReducer([secondTransaction], loadTransactionsSuccess([firstTransaction]))).toEqual([firstTransaction]);
+    });
+  });
+
   test('handles addTransaction action', () => {
-    generateGuid.mockImplementation(() => transaction1Id);
+    generateGuid.mockImplementation(() => firstTransactionId);
 
-    expect(allTransactionsReducer([], addTransaction(transaction1Payload))).toEqual([transaction1]);
+    expect(allTransactionsReducer([], addTransaction(firstTransactionPayload))).toEqual([firstTransaction]);
 
-    generateGuid.mockImplementation(() => transaction2Id);
+    generateGuid.mockImplementation(() => secondTransactionId);
 
-    expect(allTransactionsReducer([transaction1], addTransaction(transaction2Payload))).toEqual([
-      transaction1,
-      transaction2,
+    expect(allTransactionsReducer([firstTransaction], addTransaction(secondTrasnactionPayload))).toEqual([
+      firstTransaction,
+      secondTransaction,
     ]);
   });
 
   test('handles removeTransaction action', () => {
-    const stateAfterOperation = allTransactionsReducer(sampleState, removeTransaction(transaction1Id));
+    const stateAfterOperation = allTransactionsReducer(sampleState, removeTransaction(firstTransactionId));
 
-    expect(stateAfterOperation).toEqual([transaction2]);
+    expect(stateAfterOperation).toEqual([secondTransaction]);
   });
 
   test('handles changeTransaction action', () => {
@@ -61,13 +71,13 @@ describe('allTransactionsReducer', () => {
 
     const stateAfterOperation = allTransactionsReducer(
       sampleState,
-      changeTransaction(transaction2Id, newTransactionData),
+      changeTransaction(secondTransactionId, newTransactionData),
     );
 
     expect(stateAfterOperation).toEqual([
-      transaction1,
+      firstTransaction,
       {
-        id: transaction2Id,
+        id: secondTransactionId,
         ...newTransactionData,
       },
     ]);

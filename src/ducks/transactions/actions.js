@@ -1,6 +1,26 @@
 import generateGuid from '../../utils/generateGuid';
 
-import { ADD_TRANSACTION, REMOVE_TRANSACTION, CHANGE_TRANSACTION, CHANGE_NEW_TRANSACTION_FIELD } from './constants';
+import { LOAD_TRANSACTIONS_REQUEST, LOAD_TRANSACTIONS_SUCCESS, LOAD_TRANSACTIONS_ERROR, ADD_TRANSACTION, REMOVE_TRANSACTION, CHANGE_TRANSACTION, CHANGE_NEW_TRANSACTION_FIELD } from './constants';
+
+export function loadTransactionsRequest() {
+  return {
+    type: LOAD_TRANSACTIONS_REQUEST
+  };
+}
+
+export function loadTransactionsSuccess(transactions) {
+  return {
+    type: LOAD_TRANSACTIONS_SUCCESS,
+    payload: transactions
+  };
+}
+
+export function loadTransactionsError(message) {
+  return {
+    type: LOAD_TRANSACTIONS_ERROR,
+    payload: message
+  };
+}
 
 export function addTransaction({ description, category, value }) {
   return {

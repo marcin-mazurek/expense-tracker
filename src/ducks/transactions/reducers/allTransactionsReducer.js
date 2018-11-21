@@ -1,9 +1,17 @@
-import { ADD_TRANSACTION, REMOVE_TRANSACTION, CHANGE_TRANSACTION } from '../constants';
+import {
+  LOAD_TRANSACTIONS_SUCCESS,
+  ADD_TRANSACTION,
+  REMOVE_TRANSACTION,
+  CHANGE_TRANSACTION,
+} from '../constants';
 
 export default function transactionsReducer(transactions = [], action = {}) {
   const payload = action.payload;
 
   switch (action.type) {
+    case LOAD_TRANSACTIONS_SUCCESS:
+      return payload;
+
     case ADD_TRANSACTION:
       return [...transactions, payload];
 
