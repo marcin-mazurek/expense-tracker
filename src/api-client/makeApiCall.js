@@ -8,7 +8,7 @@ export default function({ endpoint, body, headers, parseJson, ...rest }) {
       ...headers,
     },
     body: body ? JSON.stringify(body) : undefined,
-  });
+  }).then(response => (response.ok ? Promise.resolve(response) : Promise.reject(response)));
 
   if (!parseJson) {
     return promise;

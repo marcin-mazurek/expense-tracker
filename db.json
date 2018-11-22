@@ -5,6 +5,12 @@
       "description": "Zakupy w Biedronce",
       "category": "Grocery",
       "value": 31.89
+    },
+    {
+      "id": "0132779a-f493-80a4-bbed-f66b0afa62d0",
+      "description": "",
+      "category": "Other",
+      "value": 1
     }
   ]
 }
