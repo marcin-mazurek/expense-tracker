@@ -2,7 +2,7 @@ import makeApiCall from './makeApiCall';
 
 export function addTransaction(transaction) {
   return makeApiCall({
-    endpoint: `transactions`,
+    endpoint: 'transactions',
     body: transaction,
     method: 'POST',
   });
@@ -10,12 +10,16 @@ export function addTransaction(transaction) {
 
 export async function loadTransactions() {
   return makeApiCall({
-    endpoint: `transactions`,
-  }).then(transactions => transactions.json());
+    endpoint: 'transactions',
+    parseJson: true,
+  });
 }
 
 export function removeTransaction(id) {
-  throw new Error('not implemented');
+  return makeApiCall({
+    endpoint: `transactions/${id}`,
+    method: 'DELETE',
+  });
 }
 
 export function changeTransaction(id, data) {

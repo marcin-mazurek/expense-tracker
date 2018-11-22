@@ -5,7 +5,7 @@ export default function loadTransactions() {
   return dispatch => {
     dispatch(loadTransactionsRequest());
 
-    loadTransactionsFromApi()
+    return loadTransactionsFromApi()
       .then(transactions => dispatch(loadTransactionsSuccess(transactions)))
       .catch(() => dispatch(loadTransactionsError()));
   };

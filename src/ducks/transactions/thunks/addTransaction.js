@@ -8,7 +8,7 @@ export default function addTransaction(data) {
 
     dispatch(addTransactionRequest(transaction));
 
-    addTransactionToApi(transaction)
+    return addTransactionToApi(transaction)
       .then(() => dispatch(addTransactionSuccess(transaction)))
       .catch(() => dispatch(addTransactionError(transaction)));
   };

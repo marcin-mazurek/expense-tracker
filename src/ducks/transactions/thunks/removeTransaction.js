@@ -5,7 +5,7 @@ export default function removeTransaction(id) {
   return dispatch => {
     dispatch(removeTransactionRequest(id));
 
-    removeTransactionFromApi()
+    return removeTransactionFromApi(id)
       .then(() => dispatch(removeTransactionSuccess(id)))
       .catch(() => dispatch(removeTransactionError(id)));
   };
