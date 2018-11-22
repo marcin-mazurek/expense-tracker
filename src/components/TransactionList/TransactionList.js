@@ -9,9 +9,14 @@ export default class TransactionList extends Component {
   static propTypes = {
     allTransactions: PropTypes.arrayOf(transactionType).isRequired,
     newTransaction: newTransactionType,
+    onLoad: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
     onNewTransactionSave: PropTypes.func.isRequired,
   };
+
+  componentDidMount() {
+    this.props.onLoad();
+  }
 
   render() {
     return (
@@ -20,10 +25,10 @@ export default class TransactionList extends Component {
         <table className="transaction-list__table">
           <thead>
             <tr>
-              <th>Amount</th>
-              <th>Category</th>
-              <th>Description</th>
-              <th>Actions</th>
+              <th className="transaction-list__header-cell">Amount</th>
+              <th className="transaction-list__header-cell">Category</th>
+              <th className="transaction-list__header-cell">Description</th>
+              <th className="transaction-list__header-cell">Actions</th>
             </tr>
           </thead>
           <tbody>

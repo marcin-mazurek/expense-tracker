@@ -8,8 +8,10 @@ export function addTransaction(transaction) {
   });
 }
 
-export function loadTransactions() {
-  throw new Error('not implemented');
+export async function loadTransactions() {
+  return makeApiCall({
+    endpoint: `transactions`,
+  }).then(transactions => transactions.json());
 }
 
 export function removeTransaction(id) {
