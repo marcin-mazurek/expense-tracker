@@ -29,17 +29,15 @@ function mockTransactionsPostRequest(responseCode) {
   });
 }
 
-test('handles saving transaction to the API and indicates it with ADD_TRANSACTION_REQUEST and ADD_TRANSACTION_SUCCESS actions', () => {
-  expect.assertions(4);
-
+test('handles saving transaction to the API and indicates it with ADD_TRANSACTION_REQUEST and ADD_TRANSACTION_SUCCESS actions', async () => {
   const requestMock = mockTransactionsPostRequest(200);
 
-  return runThunk(addTransaction, TRANSACTION_PAYLOAD).then(dispatch => {
-    expect(dispatch).toBeCalledWith(addTransactionRequest(TRANSACTION));
-    expect(dispatch).toBeCalledWith(addTransactionSuccess(TRANSACTION));
-    expect(dispatch).toHaveBeenCalledTimes(2);
-    expect(requestMock.wasCalled()).toBe(true);
-  });
+  const dispatchMock = await runThunk(addTransaction, TRANSACTION_PAYLOAD);
+
+  expect(dispatchMock).toBeCalledWith(addTransactionRequest(TRANSACTION));
+  expect(dispatchMock).toBeCalledWith(addTransactionSuccess(TRANSACTION));
+  expect(dispatchMock).toHaveBeenCalledTimes(2);
+  expect(requestMock.wasCalled()).toBe(true);
 });
 
 test('handles failure and indicates it with ADD_TRANSACTION_REQUEST and ADD_TRANSACTION_ERROR actions', () => {

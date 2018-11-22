@@ -16,12 +16,20 @@ export default class TransactionItem extends Component {
 
   render() {
     return (
-      <tr>
-        <td className="transaction-item__cell">{this.props.transaction.value.toFixed(2)}</td>
-        <td className="transaction-item__cell">{this.props.transaction.category}</td>
-        <td className="transaction-item__cell">{this.props.transaction.description}</td>
+      <tr data-test-element="transaction-item">
+        <td className="transaction-item__cell" data-test-element="transaction-item-value">
+          {this.props.transaction.value.toFixed(2)}
+        </td>
+        <td className="transaction-item__cell" data-test-element="transaction-item-category">
+          {this.props.transaction.category}
+        </td>
+        <td className="transaction-item__cell" data-test-element="transaction-item-description">
+          {this.props.transaction.description}
+        </td>
         <td className="transaction-item__cell">
-          <button onClick={this.handleRemove}>🗑</button>
+          <button onClick={this.handleRemove} data-test-element="transaction-item-remove-button">
+            🗑
+          </button>
         </td>
       </tr>
     );

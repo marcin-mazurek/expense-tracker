@@ -5,7 +5,7 @@ export default function mockHttpRequest({ url, method, requestBody, responseCode
   const scope = nock(API_ENDPOINT)
     .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
     .intercept(url, method || 'GET', requestBody)
-    .reply(responseCode, responseBody);
+    .reply(responseCode || 200, responseBody);
 
   return {
     wasCalled: () => scope.isDone(),
