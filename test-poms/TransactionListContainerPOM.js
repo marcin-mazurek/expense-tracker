@@ -54,11 +54,11 @@ class TransactionItemPOM {
   }
 
   getCategory() {
-    return this.select('transaction-item-category').text();
+    throw new Error('Implement me!');
   }
 
   getDescription() {
-    return this.select('transaction-item-description').text();
+    throw new Error('Implement me!');
   }
 
   clickRemoveButton() {
