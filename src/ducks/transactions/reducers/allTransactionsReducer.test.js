@@ -24,61 +24,59 @@ const secondTransaction = {
 
 const sampleState = [firstTransaction, secondTransaction];
 
-describe('allTransactionsReducer', () => {
-  test('begins with an empty array by default', () => {
-    expect(allTransactionsReducer()).toEqual([]);
+test('begins with an empty array by default', () => {
+  expect(allTransactionsReducer()).toEqual([]);
+});
+
+describe('loadTransactionsSuccess', () => {
+  test('handles action', () => {
+    expect(allTransactionsReducer([], loadTransactionsSuccess(sampleState))).toEqual(sampleState);
   });
 
-  describe('loadTransactionsSuccess', () => {
-    test('handles action', () => {
-      expect(allTransactionsReducer([], loadTransactionsSuccess(sampleState))).toEqual(sampleState);
-    });
-
-    test('discards the previous state if set', () => {
-      expect(allTransactionsReducer([secondTransaction], loadTransactionsSuccess([firstTransaction]))).toEqual([
-        firstTransaction,
-      ]);
-    });
-  });
-
-  test('handles addTransactionSuccess action', () => {
-    expect(allTransactionsReducer([], addTransactionSuccess(firstTransaction))).toEqual([firstTransaction]);
-
-    expect(allTransactionsReducer([firstTransaction], addTransactionSuccess(secondTransaction))).toEqual([
+  test('discards the previous state if set', () => {
+    expect(allTransactionsReducer([secondTransaction], loadTransactionsSuccess([firstTransaction]))).toEqual([
       firstTransaction,
-      secondTransaction,
     ]);
   });
+});
 
-  test('handles removeTransactionSuccess action', () => {
-    const stateAfterOperation = allTransactionsReducer(sampleState, removeTransactionSuccess(firstTransaction.id));
+test('handles addTransactionSuccess action', () => {
+  expect(allTransactionsReducer([], addTransactionSuccess(firstTransaction))).toEqual([firstTransaction]);
 
-    expect(stateAfterOperation).toEqual([secondTransaction]);
-  });
+  expect(allTransactionsReducer([firstTransaction], addTransactionSuccess(secondTransaction))).toEqual([
+    firstTransaction,
+    secondTransaction,
+  ]);
+});
 
-  test('handles changeTransactionSuccess action', () => {
-    const newTransactionData = {
-      description: 'Changed transaction 2',
-      category: 'Travels',
-      value: 5.5,
-    };
+test('handles removeTransactionSuccess action', () => {
+  const stateAfterOperation = allTransactionsReducer(sampleState, removeTransactionSuccess(firstTransaction.id));
 
-    const stateAfterOperation = allTransactionsReducer(
-      sampleState,
-      changeTransactionSuccess(secondTransaction.id, newTransactionData),
-    );
+  expect(stateAfterOperation).toEqual([secondTransaction]);
+});
 
-    expect(stateAfterOperation).toEqual([
-      firstTransaction,
-      {
-        ...secondTransaction,
-        ...newTransactionData,
-      },
-    ]);
-  });
+test('handles changeTransactionSuccess action', () => {
+  const newTransactionData = {
+    description: 'Changed transaction 2',
+    category: 'Travels',
+    value: 5.5,
+  };
 
-  test('ignores unknown actions', () => {
-    const action = { type: 'UNKNOWN_ACTION' };
-    expect(allTransactionsReducer(sampleState, action)).toBe(sampleState);
-  });
+  const stateAfterOperation = allTransactionsReducer(
+    sampleState,
+    changeTransactionSuccess(secondTransaction.id, newTransactionData),
+  );
+
+  expect(stateAfterOperation).toEqual([
+    firstTransaction,
+    {
+      ...secondTransaction,
+      ...newTransactionData,
+    },
+  ]);
+});
+
+test('ignores unknown actions', () => {
+  const action = { type: 'UNKNOWN_ACTION' };
+  expect(allTransactionsReducer(sampleState, action)).toBe(sampleState);
 });
