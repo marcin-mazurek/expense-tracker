@@ -12,6 +12,7 @@ export default class TransactionList extends Component {
     onLoad: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
     onNewTransactionSave: PropTypes.func.isRequired,
+    onNewTransactionFieldChange: PropTypes.func.isRequired,
   };
 
   componentDidMount() {

@@ -1,8 +1,7 @@
 import addTransaction from './addTransaction';
 import { addTransactionRequest, addTransactionSuccess, addTransactionError } from '../';
 import generateGuid from '../../../utils/generateGuid';
-import { runThunk } from '../../../../test-utils';
-import mockHttpRequest from '../../../../test-utils/mockHttpRequest';
+import { runThunk, mockHttpRequest } from '../../../../test-utils';
 
 // Test data
 const TRANSACTION_PAYLOAD = {
@@ -30,7 +29,6 @@ function mockTransactionsPostRequest(responseCode) {
   });
 }
 
-// Helper functions
 test('handles saving transaction to the API and indicates it with ADD_TRANSACTION_REQUEST and ADD_TRANSACTION_SUCCESS actions', () => {
   expect.assertions(4);
 

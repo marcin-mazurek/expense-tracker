@@ -27,11 +27,7 @@ export default class NewTransaction extends Component {
   };
 
   handleSave = () => {
-    this.props.onSave(
-      normalizeModel(
-        this.props.transaction
-        )
-        );
+    this.props.onSave(normalizeModel(this.props.transaction));
   };
 
   render() {
