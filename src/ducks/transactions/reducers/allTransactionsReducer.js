@@ -1,8 +1,8 @@
 import {
   LOAD_TRANSACTIONS_SUCCESS,
-  ADD_TRANSACTION,
-  REMOVE_TRANSACTION,
-  CHANGE_TRANSACTION,
+  ADD_TRANSACTION_SUCCESS,
+  REMOVE_TRANSACTION_SUCCESS,
+  CHANGE_TRANSACTION_SUCCESS,
 } from '../constants';
 
 export default function transactionsReducer(transactions = [], action = {}) {
@@ -12,10 +12,10 @@ export default function transactionsReducer(transactions = [], action = {}) {
     case LOAD_TRANSACTIONS_SUCCESS:
       return payload;
 
-    case ADD_TRANSACTION:
+    case ADD_TRANSACTION_SUCCESS:
       return [...transactions, payload];
 
-    case REMOVE_TRANSACTION:
+    case REMOVE_TRANSACTION_SUCCESS:
       return transactions.reduce((accumulator, transaction) => {
         if (transaction.id === payload) {
           return accumulator;
@@ -24,7 +24,7 @@ export default function transactionsReducer(transactions = [], action = {}) {
         return [...accumulator, transaction];
       }, []);
 
-    case CHANGE_TRANSACTION:
+    case CHANGE_TRANSACTION_SUCCESS:
       return transactions.map(transaction => {
         if (transaction.id !== payload.id) {
           return transaction;

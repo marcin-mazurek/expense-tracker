@@ -1,5 +1,5 @@
 import newTransactionReducer from './newTransactionReducer';
-import { changeNewTransactionField } from '../actions';
+import { changeNewTransactionField, addTransactionSuccess } from '../actions';
 
 const fields = {
   description: '',
@@ -32,7 +32,7 @@ describe('changeNewTransactionField', () => {
     });
   });
 
-  test('ignores arbitrary fields', () => {
+  test('ignores non-existent fields', () => {
     const action = changeNewTransactionField('nonExistentField', 'lorem-ipsum');
     expect(newTransactionReducer(fields, action)).toBe(fields);
   });

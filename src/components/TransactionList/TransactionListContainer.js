@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { getAllTransactions, getNewTransaction } from '../../ducks/transactions/selectors';
-import { removeTransaction, changeNewTransactionField, addTransaction } from '../../ducks/transactions/actions';
+import { getAllTransactions, getNewTransaction } from '../../ducks/transactions';
+import { removeTransactionRequest, changeNewTransactionField, addTransaction } from '../../ducks/transactions';
 import TransactionList from './TransactionList';
 
 const mapStateToProps = state => ({
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onRemove(id) {
-    dispatch(removeTransaction(id));
+    dispatch(removeTransactionRequest(id));
   },
   onNewTransactionFieldChange(field, value) {
     dispatch(changeNewTransactionField(field, value));

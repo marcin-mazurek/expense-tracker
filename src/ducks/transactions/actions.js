@@ -1,53 +1,98 @@
-import generateGuid from '../../utils/generateGuid';
-
-import { LOAD_TRANSACTIONS_REQUEST, LOAD_TRANSACTIONS_SUCCESS, LOAD_TRANSACTIONS_ERROR, ADD_TRANSACTION, REMOVE_TRANSACTION, CHANGE_TRANSACTION, CHANGE_NEW_TRANSACTION_FIELD } from './constants';
+import {
+  LOAD_TRANSACTIONS_REQUEST,
+  LOAD_TRANSACTIONS_SUCCESS,
+  LOAD_TRANSACTIONS_ERROR,
+  ADD_TRANSACTION_REQUEST,
+  ADD_TRANSACTION_SUCCESS,
+  ADD_TRANSACTION_ERROR,
+  REMOVE_TRANSACTION_REQUEST,
+  REMOVE_TRANSACTION_SUCCESS,
+  REMOVE_TRANSACTION_ERROR,
+  CHANGE_TRANSACTION_REQUEST,
+  CHANGE_TRANSACTION_SUCCESS,
+  CHANGE_TRANSACTION_ERROR,
+  CHANGE_NEW_TRANSACTION_FIELD,
+} from './constants';
 
 export function loadTransactionsRequest() {
   return {
-    type: LOAD_TRANSACTIONS_REQUEST
+    type: LOAD_TRANSACTIONS_REQUEST,
   };
 }
 
 export function loadTransactionsSuccess(transactions) {
   return {
     type: LOAD_TRANSACTIONS_SUCCESS,
-    payload: transactions
+    payload: transactions,
   };
 }
 
-export function loadTransactionsError(message) {
+export function loadTransactionsError() {
   return {
     type: LOAD_TRANSACTIONS_ERROR,
-    payload: message
   };
 }
 
-export function addTransaction({ description, category, value }) {
+export function addTransactionRequest(transaction) {
   return {
-    type: ADD_TRANSACTION,
-    payload: {
-      id: generateGuid(),
-      description,
-      category,
-      value,
-    },
+    type: ADD_TRANSACTION_REQUEST,
+    payload: transaction,
   };
 }
 
-export function removeTransaction(id) {
+export function addTransactionSuccess(transaction) {
   return {
-    type: REMOVE_TRANSACTION,
+    type: ADD_TRANSACTION_SUCCESS,
+    payload: transaction,
+  };
+}
+
+export function addTransactionError(transaction) {
+  return {
+    type: ADD_TRANSACTION_ERROR,
+    payload: transaction,
+  };
+}
+
+export function removeTransactionRequest(id) {
+  return {
+    type: REMOVE_TRANSACTION_REQUEST,
     payload: id,
   };
 }
 
-export function changeTransaction(id, { description, category, value }) {
+export function removeTransactionSuccess(id) {
   return {
-    type: CHANGE_TRANSACTION,
-    payload: {
-      id,
-      data: { description, category, value },
-    },
+    type: REMOVE_TRANSACTION_SUCCESS,
+    payload: id,
+  };
+}
+
+export function removeTransactionError(id) {
+  return {
+    type: REMOVE_TRANSACTION_ERROR,
+    payload: id,
+  };
+}
+
+export function changeTransactionRequest(id, data) {
+  return {
+    type: CHANGE_TRANSACTION_REQUEST,
+    payload: { id, data },
+  };
+}
+
+export function changeTransactionSuccess(id, data) {
+  return {
+    type: CHANGE_TRANSACTION_SUCCESS,
+    payload: { id, data },
+  };
+}
+
+export function changeTransactionError(id, data) {
+  return {
+    type: CHANGE_TRANSACTION_ERROR,
+    payload: { id, data },
   };
 }
 

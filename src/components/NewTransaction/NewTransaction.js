@@ -5,7 +5,7 @@ import normalizeModel from './normalizeModel';
 
 import './NewTransaction.css';
 
-const NewTransactionInput = (props) => <input type="text" className="new-transaction__input" {...props} />;
+const NewTransactionInput = props => <input type="text" className="new-transaction__input" {...props} />;
 
 export default class NewTransaction extends Component {
   static propTypes = {
@@ -27,13 +27,17 @@ export default class NewTransaction extends Component {
   };
 
   handleSave = () => {
-    this.props.onSave(normalizeModel(this.props.transaction));
+    this.props.onSave(
+      normalizeModel(
+        this.props.transaction
+        )
+        );
   };
 
   render() {
     return (
       <tr>
-        <td class="new-transaction__cell">
+        <td className="new-transaction__cell">
           <NewTransactionInput
             type="number"
             step="0.01"
@@ -42,22 +46,24 @@ export default class NewTransaction extends Component {
             placeholder="0.00"
           />
         </td>
-        <td class="new-transaction__cell">
+        <td className="new-transaction__cell">
           <NewTransactionInput
             value={this.props.transaction.category}
             onChange={this.handleCategoryChange}
             placeholder="Category"
           />
         </td>
-        <td class="new-transaction__cell">
+        <td className="new-transaction__cell">
           <NewTransactionInput
             value={this.props.transaction.description}
             onChange={this.handleDescriptionChange}
             placeholder="Description"
           />
         </td>
-        <td class="new-transaction__cell">
-          <button onClick={this.handleSave} className="new-transaction__button">Save</button>
+        <td className="new-transaction__cell">
+          <button onClick={this.handleSave} className="new-transaction__button">
+            Save
+          </button>
         </td>
       </tr>
     );

@@ -1,4 +1,4 @@
-import { ADD_TRANSACTION, CHANGE_NEW_TRANSACTION_FIELD } from '../constants';
+import { ADD_TRANSACTION_SUCCESS, CHANGE_NEW_TRANSACTION_FIELD } from '../constants';
 
 const newTransactionInitialFields = {
   value: '',
@@ -10,7 +10,7 @@ const allowedFields = ['value', 'description', 'category'];
 
 export default function newTransactionReducer(fields = newTransactionInitialFields, action = {}) {
   switch (action.type) {
-    case ADD_TRANSACTION:
+    case ADD_TRANSACTION_SUCCESS:
       return newTransactionInitialFields;
 
     case CHANGE_NEW_TRANSACTION_FIELD:
